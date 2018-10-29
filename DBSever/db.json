@@ -1,0 +1,16 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "samsumj7",
+      "price": 699,
+      "status": true
+    },
+    {
+      "name": "SamSum galaxy j8",
+      "price": "8.250",
+      "status": "true",
+      "id": 2
+    }
+  ]
+}
