@@ -1,17 +1,38 @@
 import React, { Component } from 'react';
 import ProductList from './../../components/ProductList/ProductList';
 import ProductItem from './../../components/ProductItem/ProductItem';
-
+import { connect } from 'react-redux';
+import calllApi from './../../api/Api';
+import {Link } from 'react-router-dom';
 class ProductListPage extends Component {
+  
+  constructor(props){
+    super(props);
+    this.state = {
+      products: []
+    };
+}
+componentDidMount() {
+  calllApi('products', 'GET', null).then(res =>{
+    this.setState({
+      products : res.data
+    });
+  });
+}
+
   render() {
-    var products = [];
+    
+    var {products} = this.state;
+
     return (
       <div className= "col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <buttom type="buttom" className="btn btn-info mb-10">
+        <Link to = "/product/add" className="btn btn-info mb-10">
           Add List
-        </buttom>
-        <ProductList />
-        {this.showProducts(products)}
+        </Link>
+        <ProductList>
+        {this.showProducts (products)}
+        </ProductList>
+       
       </div>
     );
   }
@@ -21,14 +42,24 @@ class ProductListPage extends Component {
         return (
           <ProductItem 
             key = {index}
-            product= {product}
+            product={product}
             index= {index}
           />
-        )
-      })
+        );
+      });
     }
+  }
+}
+const mapStateToProps = state => {
+  return{
+    products : state.products
+  }
+};
+
+const mapDispatchToProps = ()=> {
+  return {
 
   }
 }
 
-export default ProductListPage;
+export default connect(mapStateToProps, null)(ProductListPage);

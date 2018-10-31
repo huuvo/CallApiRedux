@@ -35,8 +35,6 @@ const MenuLink = ({label, to, activeOnlyWhenExact}) => {
 class Menu extends Component {
 
   showMenu = (menus) => {
-    var result = null;
-    console.log(menus, menus.lenght);
       return menus.map ((menu,index) => {
         return (
           <MenuLink 
